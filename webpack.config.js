@@ -1,14 +1,14 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack"); // only add this if you don't have yet
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack'); // only add this if you don't have yet
 const { ModuleFederationPlugin } = webpack.container;
-const deps = require("./package.json").dependencies;
+const deps = require('./package.json').dependencies;
 
 module.exports = {
   output: {
-    publicPath: "auto",
-    scriptType: "text/javascript",
+    publicPath: 'auto',
+    scriptType: 'text/javascript',
   },
-  mode: "development",
+  mode: 'development',
   devServer: {
     port: 3002,
     open: true,
@@ -18,34 +18,34 @@ module.exports = {
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        use: { loader: "babel-loader" },
+        use: { loader: 'babel-loader' },
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: './src/index.html',
     }),
     new ModuleFederationPlugin({
-      name: "jsButton",
-      filename: "remoteEntry.js",
-      library: { type: "var", name: "jsButton" },
-      exposes: { "./JsButton": "./src/index.js" },
+      name: 'vanillaButton',
+      filename: 'remoteEntry.js',
+      library: { type: 'var', name: 'vanillaButton' },
+      exposes: { './JsButton': './src/index.js' },
       shared: {
         ...deps,
-        "windowed-observable": {
+        'windowed-observable': {
           singleton: true,
           strictVersion: true,
-          eager:true,
-        }
-      }
+          eager: true,
+        },
+      },
     }),
   ],
   resolve: {
-    extensions: [".js"],
+    extensions: ['.js'],
   },
 };
