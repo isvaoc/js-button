@@ -51,7 +51,7 @@ class MyButtonVanillaJs extends HTMLElement {
 window.customElements.define('button-js', MyButtonVanillaJs);
 
 const btn = document.createElement('button-js');
-document.getElementById('root').append(btn);
+document.getElementById('vanilla').append(btn);
 
 export const vanillaButton = () => {
   return btn;
