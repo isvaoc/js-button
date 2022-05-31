@@ -1,11 +1,19 @@
 class MyButtonVanillaJs extends HTMLElement {
   constructor() {
     super();
-    let shadow = this.attachShadow({ mode: 'open' });
+    let shadow = this.attachShadow({ mode: "open" });
 
-    this.buttonJs = document.createElement('button');
-
+    this.buttonJs = document.createElement("button");
     shadow.appendChild(this.buttonJs);
+  }
+
+  addJs() {
+    const jsEvent = new CustomEvent("clickJs", {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+    window.dispatchEvent(jsEvent);
   }
 
   connectedCallback() {
@@ -17,42 +25,45 @@ class MyButtonVanillaJs extends HTMLElement {
                 </svg>
             </section>
             <section>
-                Vanilla Js
+                Vanilla Js: <span id="jsCount">0</span>
             </section>
         `;
+    this.buttonJs.onclick = this.addJs;
 
-    this.buttonJs.style.backgroundColor = '#F7E116';
-    this.buttonJs.style.width = '200px';
-    this.buttonJs.style.height = '50px';
-    this.buttonJs.style.borderRadius = '40px';
+    this.buttonJs.style.backgroundColor = "#F7E116";
+    this.buttonJs.style.width = "200px";
+    this.buttonJs.style.height = "50px";
+    this.buttonJs.style.borderRadius = "40px";
     this.buttonJs.style.fontFamily = "'Roboto', sans-serif";
-    this.buttonJs.style.fontSize = '3vh';
-    this.buttonJs.style.border = 'none';
-    this.buttonJs.style.display = 'flex';
-    this.buttonJs.style.flexDirection = 'row';
-    this.buttonJs.style.justifyContent = 'flex-start';
-    this.buttonJs.style.alignItems = 'center';
+    this.buttonJs.style.fontSize = "2.8vh";
+    this.buttonJs.style.border = "none";
+    this.buttonJs.style.display = "flex";
+    this.buttonJs.style.flexDirection = "row";
+    this.buttonJs.style.justifyContent = "flex-start";
+    this.buttonJs.style.alignItems = "center";
 
-    this.buttonJs.firstElementChild.style.backgroundColor = 'white';
-    this.buttonJs.firstElementChild.style.width = '23%';
-    this.buttonJs.firstElementChild.style.height = '90%';
-    this.buttonJs.firstElementChild.style.borderRadius = '50%';
-    this.buttonJs.firstElementChild.style.display = 'flex';
-    this.buttonJs.firstElementChild.style.flexDirection = 'row';
-    this.buttonJs.firstElementChild.style.justifyContent = 'center';
-    this.buttonJs.firstElementChild.style.alignItems = 'center';
-    this.buttonJs.firstElementChild.style.marginRight = '12%';
+    this.buttonJs.firstElementChild.style.backgroundColor = "white";
+    this.buttonJs.firstElementChild.style.width = "23%";
+    this.buttonJs.firstElementChild.style.height = "90%";
+    this.buttonJs.firstElementChild.style.borderRadius = "50%";
+    this.buttonJs.firstElementChild.style.display = "flex";
+    this.buttonJs.firstElementChild.style.flexDirection = "row";
+    this.buttonJs.firstElementChild.style.justifyContent = "center";
+    this.buttonJs.firstElementChild.style.alignItems = "center";
 
-    this.buttonJs.firstElementChild.firstElementChild.style.height = '60%';
+    this.buttonJs.firstElementChild.firstElementChild.style.height = "60%";
     this.buttonJs.firstElementChild.firstElementChild.style.alignSelf =
-      'center';
+      "center";
   }
 }
-window.customElements.define('button-js', MyButtonVanillaJs);
+window.customElements.define("button-js", MyButtonVanillaJs);
+const btn = document.createElement("button-js");
 
-const btn = document.createElement('button-js');
-document.getElementById('vanilla').append(btn);
-
-export const vanillaButton = () => {
-  return btn;
+let count = 0;
+btn.setAttribute("count", 0);
+btn.onclick = () => {
+  btn.setAttribute("count", count++);
+  btn.shadowRoot.querySelector("#jsCount").innerText = count;
 };
+
+document.getElementById("vanilla").append(btn);
