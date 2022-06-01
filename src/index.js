@@ -55,6 +55,15 @@ class MyButtonVanillaJs extends HTMLElement {
     this.buttonJs.firstElementChild.firstElementChild.style.height = "60%";
     this.buttonJs.firstElementChild.firstElementChild.style.alignSelf =
       "center";
+
+      window.addEventListener('changeColor5', (event) => {
+        this.buttonJs.style.color  = event.detail.color;
+        this.buttonJs.style.backgroundColor = event.detail.bgColor;
+      });
+      window.addEventListener('changeColor10', (event) => {
+        this.buttonJs.style.color  = event.detail.color;
+        this.buttonJs.style.backgroundColor = event.detail.bgColor;
+      });
   }
 }
 window.customElements.define("button-js", MyButtonVanillaJs);
