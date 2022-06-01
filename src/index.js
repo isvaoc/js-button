@@ -50,6 +50,7 @@ class MyButtonVanillaJs extends HTMLElement {
     this.buttonJs.firstElementChild.style.flexDirection = "row";
     this.buttonJs.firstElementChild.style.justifyContent = "center";
     this.buttonJs.firstElementChild.style.alignItems = "center";
+    this.buttonJs.firstElementChild.style.marginRight = "5px";
 
     this.buttonJs.firstElementChild.firstElementChild.style.height = "60%";
     this.buttonJs.firstElementChild.firstElementChild.style.alignSelf =
