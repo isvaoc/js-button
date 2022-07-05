@@ -18,8 +18,7 @@ class MyButtonVanillaJs extends HTMLElement {
             <section>
                 Vanilla Js: <span id="jsCount">0</span>
             </section>
-        `;
-    this.buttonJs.onclick = this.addJs;
+    `;
 
     this.buttonJs.style.backgroundColor = "#F7E116";
     this.buttonJs.style.width = "200px";
@@ -48,6 +47,7 @@ class MyButtonVanillaJs extends HTMLElement {
       "center";
   }
 }
+
 window.customElements.define("button-js", MyButtonVanillaJs);
 const btn = document.createElement("button-js");
 
